@@ -3,3 +3,4 @@ var a = function(name) {
 
 }
 exports.sayHai = a
+console.log(module.exports === exports);

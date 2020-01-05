@@ -3,6 +3,8 @@ const handleUserRouter = require('./src/router/user');
 const serverHandle = (req, res) => {
 
     res.setHeader('content-type', 'application/json')
+    const url = req.url
+    req.path = url.split('?')[0];
     const blogData = handleBlogRouter(req, res)
     if (blogData) {
         res.end(

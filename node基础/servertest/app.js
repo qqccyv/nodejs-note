@@ -2,6 +2,9 @@ const http = require('http');
 const app = http.createServer();
 app.on('request', (req, res) => {
     // res.end('<h1>hello world</h1>')
+    res.writeHead(200, {
+        'content-type': 'text/html;charset-utf8'
+    })
     if (req.url === '/index') {
         res.end('index...')
     } else {

@@ -8,6 +8,8 @@ const getPostData = (req) => {
             resolve({})
             return
         }
+        // console.log(req.headers['content-type']);
+
         if (req.headers['content-type'] !== 'application/json') {
             resolve({});
             return
@@ -24,7 +26,10 @@ const getPostData = (req) => {
                 resolve({})
                 return
             }
-            resolve(JSON.parse(JSON.stringify(postData)))
+            // console.log(postData);
+
+            // resolve(JSON.parse(JSON.stringify(postData)))
+            resolve(JSON.parse(postData))
         })
     })
     return promise

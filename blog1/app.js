@@ -24,7 +24,7 @@ const getPostData = (req) => {
                 resolve({})
                 return
             }
-            resolve(JSON.parse(postData))
+            resolve(JSON.stringify(postData))
         })
     })
     return promise

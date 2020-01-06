@@ -12,7 +12,7 @@ app.on('request', (req, res) => {
     console.log(pathname);
     console.log(query);
 
-    if (req.url === '/index' || req.url === '/') {
+    if (pathname === '/index' || pathname === '/') {
         res.end('index...')
     } else {
         res.end('404....')

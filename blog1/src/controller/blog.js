@@ -25,7 +25,15 @@ const getDetail = (id) => {
         author: '张三'
     }
 }
+const newBlog = (blogData = {}) => {
+    console.log(blogData);
+
+    return {
+        id: 3
+    }
+}
 module.exports = {
     getList,
-    getDetail
+    getDetail,
+    newBlog
 }

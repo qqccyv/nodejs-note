@@ -29,18 +29,18 @@ const getPostData = (req) => {
     })
     return promise
 }
-getPostData(req).then(postData => {
-    req.body = postData;
-    const serverHandle = (req, res) => {
 
-        res.setHeader('content-type', 'application/json')
+const serverHandle = (req, res) => {
 
-        const url = req.url
-        req.path = url.split('?')[0];
+    res.setHeader('content-type', 'application/json')
 
-        req.query = querystring.parse(url.split('?')[1])
-            // let { pathname, query } = url.parse(req.url, true)  url.parse方法简写
+    const url = req.url
+    req.path = url.split('?')[0];
 
+    req.query = querystring.parse(url.split('?')[1])
+        // let { pathname, query } = url.parse(req.url, true)  url.parse方法简写
+    getPostData(req).then(postData => {
+        req.body = postData;
         const blogData = handleBlogRouter(req, res)
         if (blogData) {
             res.end(
@@ -59,7 +59,8 @@ getPostData(req).then(postData => {
         res.writeHead(404, { "content-type": "text/plain" });
         res.write("404 Not Found\n")
         res.end()
-    }
-})
+    })
 
+
+}
 module.exports = serverHandle

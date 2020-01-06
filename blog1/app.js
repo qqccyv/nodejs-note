@@ -24,7 +24,7 @@ const getPostData = (req) => {
                 resolve({})
                 return
             }
-            resolve(JSON.stringify(postData))
+            resolve(JSON.parse(JSON.stringify(postData)))
         })
     })
     return promise
@@ -40,6 +40,8 @@ const serverHandle = (req, res) => {
     req.query = querystring.parse(url.split('?')[1])
         // let { pathname, query } = url.parse(req.url, true)  url.parse方法简写
     getPostData(req).then(postData => {
+        console.log(postData);
+
         req.body = postData;
         const blogData = handleBlogRouter(req, res)
         if (blogData) {

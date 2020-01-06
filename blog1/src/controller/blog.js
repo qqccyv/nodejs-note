@@ -26,7 +26,7 @@ const getDetail = (id) => {
     }
 }
 const newBlog = (blogData = {}) => {
-    console.log(blogData);
+    // console.log(blogData);
 
     return {
         id: 3

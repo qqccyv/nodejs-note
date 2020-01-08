@@ -15,3 +15,16 @@ use myblog;
 -- select username from users where username like'%zhangs%';
 
 -- select*from users where password like '%1%' order by id desc;
+-- update users set realname = '李四2' where username = 'lisi';
+
+
+-- delete from users where username = 'lisi';
+
+-- insert into users(username,`password`,realname) values('lisi','123','李四');
+
+-- select*from users where state='1';
+select*from users where state<>'0';
+-- delete from users where username = 'lisi';
+
+-- insert into users(username,`password`,realname) values('lisi','123','李四');
+update users set state = '1' where username = 'lisi';

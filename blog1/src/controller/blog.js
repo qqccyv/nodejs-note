@@ -11,13 +11,10 @@ const getList = (author, keyword) => {
     return exec(sql)
 }
 const getDetail = (id) => {
-    return {
-        id: 1,
-        title: '标题A',
-        content: '内容A',
-        createTime: 1578205925836,
-        author: '张三'
-    }
+    const sql = `select*from blogs where id="${id}"`
+    return exec(sql).then(rows => {
+        return rows[0]
+    })
 }
 const newBlog = (blogData = {}) => {
     // console.log(blogData);

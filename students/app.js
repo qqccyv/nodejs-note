@@ -34,6 +34,12 @@ app.on('request', async(req, res) => {
                 hobbies
             })
             res.end(html)
+        } else if (pathname === '/remove') {
+            await User.findOneAndDelete({ _id: query.id })
+            res.writeHead(301, {
+                Location: '/list'
+            });
+            res.end();
         }
     } else if (method === 'POST') {
 
@@ -45,6 +51,20 @@ app.on('request', async(req, res) => {
             req.on('end', async() => {
                 let user = querystring.parse(postdata)
                 await User.create(user);
+                res.writeHead(301, {
+                    Location: '/list'
+                });
+                res.end()
+            })
+        } else if (pathname === '/modify') {
+
+            let postdata = '';
+            req.on('data', chunk => {
+                postdata += chunk;
+            });
+            req.on('end', async() => {
+                let user = querystring.parse(postdata)
+                await User.updateOne({ _id: query.id }, user);
                 res.writeHead(301, {
                     Location: '/list'
                 });

@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<h3>修改用户</h3>
-		<form method="post" action="/modify">
+		<form method="post" action="/modify?id={{user.id}}">
 		  <div class="form-group">
 		    <label>用户名</label>
 		    <input type="text" name="name" value="{{ user.name }}" class="form-control" placeholder="请填写用户名">

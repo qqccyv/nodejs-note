@@ -26,7 +26,7 @@ const newBlog = (blogData = {}) => {
 
     const sql = `insert into blogs (title, content ,createtime, author) values ('${title}','${content}', ${createTime},'${author}') `
     return exec(sql).then(insertData => {
-        console.log('insertData is', insertData);
+        // console.log('insertData is', insertData);
         return {
             id: insertData.insertId
         }
@@ -34,12 +34,29 @@ const newBlog = (blogData = {}) => {
     })
 }
 const updateBlog = (id, blogData = {}) => {
-    // console.log(blogData, id);
+    console.log(blogData, id);
+    const title = blogData.title;
+    const content = blogData.content;
+    const sql = `update blogs set title='${title}' ,content='${content}' where id=${id} `
+    return exec(sql).then(updateData => {
+        // console.log(updateData);
 
-    return true
+        if (updateData.affectedRows > 0) {
+            return true
+        }
+        return false
+    })
 }
-const delBlog = (id) => {
-    return true
+const delBlog = (id, author) => {
+    const sql = `delete from blogs where id=${id} and author='${author}'`
+
+    return exec(sql).then(delData => {
+        if (delData.affectedRows > 0) {
+
+            return true
+        }
+        return false
+    })
 }
 module.exports = {
     getList,

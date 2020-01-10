@@ -1,14 +1,24 @@
 const express = require('express');
 const app = express();
-app.get('/', (req, res) => {
-    res.send('hello express')
+
+
+app.use((req, res, next) => {
+    req.age = 19
+    next()
+})
+app.use('/', (req, res, next) => {
+    req.sex = 'man'
+    next()
+})
+app.get('/', (req, res, next) => {
+    req.name = 'dengyu';
+    next();
 });
-app.get('/list', (req, res) => {
+app.get('/', (req, res) => {
     res.send({
-
-        name: 'dengyu',
-        age: 18
-
+        name: req.name,
+        age: req.age,
+        sex: req.sex
     })
 })
 

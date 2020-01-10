@@ -1,7 +1,7 @@
 const querystring = require('querystring')
 const handleBlogRouter = require('./src/router/blog');
 const handleUserRouter = require('./src/router/user');
-
+// const url = require('url')
 const getPostData = (req) => {
     const promise = new Promise((resolve, reject) => {
         if (req.method !== 'POST') {
@@ -30,6 +30,8 @@ const getPostData = (req) => {
 
             // resolve(JSON.parse(JSON.stringify(postData)))
             resolve(JSON.parse(postData))
+                // console.log(postData);
+
         })
     })
     return promise
@@ -48,6 +50,7 @@ const serverHandle = (req, res) => {
         // console.log(postData);
 
         req.body = postData;
+        // console.log(req.body);
 
         // const blogData = handleBlogRouter(req, res)
         // if (blogData) {

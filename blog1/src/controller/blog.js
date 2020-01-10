@@ -17,11 +17,21 @@ const getDetail = (id) => {
     })
 }
 const newBlog = (blogData = {}) => {
-    // console.log(blogData);
+    console.log(blogData);
+    const title = blogData.title;
+    const content = blogData.content;
+    const author = blogData.author;
+    const createTime = Date.now();
+    // console.log(createtime);
 
-    return {
-        id: 3
-    }
+    const sql = `insert into blogs (title, content ,createtime, author) values ('${title}','${content}', ${createTime},'${author}') `
+    return exec(sql).then(insertData => {
+        console.log('insertData is', insertData);
+        return {
+            id: insertData.insertId
+        }
+
+    })
 }
 const updateBlog = (id, blogData = {}) => {
     // console.log(blogData, id);

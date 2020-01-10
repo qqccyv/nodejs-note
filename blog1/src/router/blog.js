@@ -3,6 +3,7 @@ const { SuccessModel, ErrorModel } = require('../model/resModel')
 const handleBlogRouter = (req, res) => {
     const method = req.method;
     const id = req.query.id;
+    // console.log(req.path);
 
     if (method === 'GET' && req.path === '/api/blog/list') {
         const author = req.query.author || ''
@@ -21,8 +22,13 @@ const handleBlogRouter = (req, res) => {
         });
     }
     if (method === 'POST' && req.path === '/api/blog/new') {
-        const data = newBlog(req.body);
-        return new SuccessModel(data)
+        req.body.author = 'zhangsan'
+            // console.log(req.body);
+
+        const result = newBlog(req.body);
+        return result.then(data => {
+            return new SuccessModel(data)
+        })
 
     }
     if (method === 'POST' && req.path === '/api/blog/update') {

@@ -70,13 +70,18 @@ const serverHandle = (req, res) => {
         }
 
 
-        const userData = handleUserRouter(req, res);
-        if (userData) {
-            res.end(
-                JSON.stringify(userData)
-            )
+        const resultData = handleUserRouter(req, res);
+        if (resultData) {
+            resultData.then(userData => {
+                res.end(
+                    JSON.stringify(userData)
+                )
+            })
+
             return
         }
+
+
 
         res.writeHead(404, { "content-type": "text/plain" });
         res.write("404 Not Found\n")

@@ -17,7 +17,7 @@ const getDetail = (id) => {
     })
 }
 const newBlog = (blogData = {}) => {
-    console.log(blogData);
+    // console.log(blogData);
     const title = blogData.title;
     const content = blogData.content;
     const author = blogData.author;
@@ -34,7 +34,7 @@ const newBlog = (blogData = {}) => {
     })
 }
 const updateBlog = (id, blogData = {}) => {
-    console.log(blogData, id);
+    // console.log(blogData, id);
     const title = blogData.title;
     const content = blogData.content;
     const sql = `update blogs set title='${title}' ,content='${content}' where id=${id} `

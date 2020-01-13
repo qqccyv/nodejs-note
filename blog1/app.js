@@ -1,6 +1,7 @@
 const querystring = require('querystring')
 const handleBlogRouter = require('./src/router/blog');
 const handleUserRouter = require('./src/router/user');
+const {set, get } = require('./src/db/redis')
 const getCookieExpires = () => {
         let d = new Date();
         // console.log(d);
@@ -48,13 +49,13 @@ const getPostData = (req) => {
     return promise
 }
 
-const SESSION_DATA = {};
+// const SESSION_DATA = {};
 const serverHandle = (req, res) => {
 
     res.setHeader('content-type', 'application/json')
 
     const url = req.url
-    req.path = url.split('?')[0];
+    req.path = url.splcdit('?')[0];
 
     req.query = querystring.parse(url.split('?')[1])
         //解析cookie
@@ -71,19 +72,37 @@ const serverHandle = (req, res) => {
         })
         // console.log(req.cookie);
         //解析session ????????????????????????????
+        // let needSetCookie = false;
+        // let userId = req.cookie.userid
+        // if (userId) {
+        //     if (!SESSION_DATA[userId]) {
+        //         SESSION_DATA[userId] = {}
+        //     }
+        // } else {
+        //     needSetCookie = true
+        //     userId = `${Date.now()}_${Math.random()}`
+        //     SESSION_DATA[userId] = {}
+
+    // }
+    // req.session = SESSION_DATA[userId]
+
+
     let needSetCookie = false;
     let userId = req.cookie.userid
-    if (userId) {
-        if (!SESSION_DATA[userId]) {
-            SESSION_DATA[userId] = {}
-        }
-    } else {
+    if (!userId) {
         needSetCookie = true
         userId = `${Date.now()}_${Math.random()}`
-        SESSION_DATA[userId] = {}
-
+        set(userId, {})
     }
-    req.session = SESSION_DATA[userId]
+    req.sessionId = userId
+    get(req.sessionId).then(sessionData => {
+            if (sessionData == null) {
+                set(req.sessionId, {})
+                req.session = {}
+            } else {
+                req.session = sessionData
+            }
+        })
         // let { pathname, query } = url.parse(req.url, true)  url.parse方法简写
     getPostData(req).then(postData => {
         // console.log(postData);

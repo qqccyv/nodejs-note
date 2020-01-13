@@ -29,17 +29,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'art')
     //利用bodyparser方法连接解析post参数
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/admin', (req, res, next) => {
-        if (req.url == '/login') {
-            next()
-        } else if (req.session.username) {
-            next()
-        } else {
-            //重定向要用绝对路径！！！！！
-            res.redirect('/admin/login')
-        }
-    })
-    //分发模块化路由
+app.use('/admin', require('./middleware/loginGuard'));
+//分发模块化路由
 app.use('/home', home)
 app.use('/admin', admin)
 

@@ -28,6 +28,8 @@ const userSchema = new mongoose.Schema({
 });
 
 //创建结合
+//解决(node:23348) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead  报错
+mongoose.set('useCreateIndex', true);
 const User = mongoose.model('User', userSchema);
 
 //创建用户的键名必须严格与规则，集合对应

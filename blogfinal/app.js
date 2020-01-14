@@ -9,6 +9,8 @@ const path = require('path')
 const session = require('express-session')
 
 app.use(session({
+        //属性未添加完全会有各种提示
+        resave: false,
         secret: 'keyboard cat',
         saveUninitialized: false,
         cookie: {

@@ -36,6 +36,11 @@ app.use('/admin', require('./middleware/loginGuard'));
 app.use('/home', home)
 app.use('/admin', admin)
 
+app.use((err, req, res, next) => {
+    const result = err
+    res.redirect(`${result.path}?message=${result.message}`)
+})
+
 
 
 

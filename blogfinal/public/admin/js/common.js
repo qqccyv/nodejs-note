@@ -18,9 +18,9 @@ function animate(obj, target, callback) {
                 callback();
             }
         }
-        obj.style.top = obj.offsetTop - 1 + 'px';
+        obj.style.top = obj.offsetTop - 2 + 'px';
 
-    }, 15);
+    }, 10);
 }
 document.onclick = function(e) {
     var box = document.createElement('div');
@@ -29,11 +29,12 @@ document.onclick = function(e) {
     box.style.position = 'absolute';
     box.style.left = e.clientX + 'px';
     box.style.top = e.clientY + 'px';
+    box.style.fontSize = 40 + 'px'
     box.style.color = "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + ")";
     box.style.zIndex = 100000;
 
     document.body.appendChild(box);
-    let target = e.clientY - 20
+    let target = e.clientY - 100
     animate(box, target, function() {
         document.body.removeChild(box);
     })

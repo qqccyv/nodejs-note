@@ -12,6 +12,7 @@ admin.get('/user', require('./admin/userPage'))
 admin.get('/logout', require('./admin/logout'))
 
 admin.get('/user-edit', require('./admin/user-edit'))
+admin.post('/user-edit', require('./admin/user-edit-fn'))
 
 
 module.exports = admin;

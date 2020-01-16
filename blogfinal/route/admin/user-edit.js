@@ -1,8 +1,10 @@
 const { User } = require('../../model/user')
 module.exports = async(req, res) => {
     const { message, id } = req.query
+
     if (id) {
-        let user = await User.findOne({ _id: id })
+        // console.log('编辑');
+        let user = await User.findOne({ _id: id });
         res.render('admin/user-edit', {
             message,
             user,
@@ -10,8 +12,9 @@ module.exports = async(req, res) => {
             button: '修改'
         })
     } else {
+        // console.log('新增');
         res.render('admin/user-edit', {
-            message: message,
+            message,
             link: '/admin/user-edit',
             button: '添加'
         })

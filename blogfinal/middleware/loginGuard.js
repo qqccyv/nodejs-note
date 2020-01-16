@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 module.exports = (req, res, next) => {
-    debugger
+
     if (req.url == '/login') {
         next()
     } else if (req.session.username) {

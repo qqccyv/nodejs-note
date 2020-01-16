@@ -1,5 +1,5 @@
 const { User } = require('../../model/user')
-module.exports = async(req, res, next) => {
+module.exports = async(req, res) => {
     // let users = await User.find({})
     // res.send(users)
 

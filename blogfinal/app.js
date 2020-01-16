@@ -37,7 +37,10 @@ app.use('/home', home)
 app.use('/admin', admin)
 
 app.use((err, req, res, next) => {
-    const result = err
+
+    console.log(err);
+
+    const result = JSON.parse(err)
     res.redirect(`${result.path}?message=${result.message}`)
 })
 

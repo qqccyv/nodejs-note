@@ -2,7 +2,7 @@ const { User } = require('../../model/user')
 module.exports = async(req, res) => {
     // let users = await User.find({})
     // res.send(users)
-
+    req.app.locals.currentLink = 'user'
     let page = req.query.page || 1;
     let pageSize = 2
     let count = await User.countDocuments();

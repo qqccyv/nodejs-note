@@ -1,9 +1,8 @@
 const express = require('express')
 const home = express.Router();
 
-home.get('/default', (req, res, next) => {
-    res.render('home/default')
-})
+home.get('/', require('./home/index'))
+home.get('/article', require('./home/article'))
 
 
 module.exports = home;

@@ -7,6 +7,8 @@ require('./model/user')
 const path = require('path')
 
 const session = require('express-session')
+const template = require('art-template')
+const dateformat = require('dateformat')
 
 app.use(session({
         //属性未添加完全会有各种提示
@@ -29,6 +31,7 @@ app.engine('html', require('express-art-template'));
 app.set('views', path.join(__dirname, 'views'));
 //模板默认后缀
 app.set('view engine', 'art')
+template.defaults.imports.dateformat = dateformat
     //利用bodyparser方法连接解析post参数
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/admin', require('./middleware/loginGuard'));
@@ -41,7 +44,14 @@ app.use((err, req, res, next) => {
     console.log(err);
 
     const result = JSON.parse(err)
-    res.redirect(`${result.path}?message=${result.message}`)
+        // let obj = {path: '/admin/user-edit', message: '密码比对失败,不能进行用户信息的修改', id: id}
+    let params = [];
+    for (var attr in result) {
+        if (attr != path) {
+            params.push(attr + '=' + result[attr])
+        }
+    }
+    res.redirect(`${result.path}?${params.join('&')}`)
 })
 
 

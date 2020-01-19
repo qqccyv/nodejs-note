@@ -13,8 +13,14 @@ module.exports = async(req, res, next) => {
         if (b) {
             req.session.username = user.username
             req.app.locals.userInfo = user
-                //重定向到用户列表页面
-            res.redirect('/admin/user')
+            req.session.role = user.role
+            if (user.role == 'normal') {
+                res.redirect('/home/')
+            } else if (user.role == 'admin') {
+                res.redirect('/admin/user')
+
+            }
+            //重定向到用户列表页面
         } else {
             res.status(400).render('admin/error', { msg: '邮箱地址或者密码错误' })
         }

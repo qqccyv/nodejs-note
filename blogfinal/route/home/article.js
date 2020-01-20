@@ -3,6 +3,8 @@ module.exports = async(req, res, next) => {
 
     const id = req.query.id
     let article = await Article.findOne({ _id: id }).populate('author')
+    console.log(req.session.username);
+
     res.render('home/article', {
             article,
             username: req.session.username
